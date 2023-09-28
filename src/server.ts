@@ -3,14 +3,16 @@ import cors from "cors";
 import { notFound } from "./middlewares/notFound";
 import taskRouter from "./routes/taskRoute";
 import 'dotenv/config';
-import './config/DatabaseConnect';
+import './database/config/DatabaseConnect';
 
 class App{
-  public server: Express.Application = Express();
-  readonly PORT = process.env.PORT
+  
+  private server: Express.Application;
+  private readonly PORT;
 
   constructor(){
-    this.server;
+    this.server = Express();
+    this.PORT = process.env.PORT as string
     this.init();
     this.router();
     this.middleware();

@@ -14,7 +14,7 @@ class DatabaseConnect{
 
         this.mongoose.set('strictQuery', true);
 
-        mongoose.connect(process.env.DATABASE_URL as string)
+        this.mongoose.connect(process.env.DATABASE_URL as string)
         .then(() => console.log("connected"))
         .catch((err) => console.log(`not connected ${err}`));
     }

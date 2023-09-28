@@ -1,19 +1,21 @@
-import Task from "../models/taskModel";
+import Task from "../database/models/taskModel";
 import { Request, Response } from "express";
 
 class TaskController {
 
-    async create (req: Request, res: Response){
+    async create (req: Request, res: Response): Promise<Response>{
         try {
 
             const {title} = req.body
             const task = await Task.findOne({ title });
 
             if (task) {
-                return res.json({ msg: "user already exists", success: false });
+                return res.json({ msg: "task already exists", success: false });
             }
 
             const newTask = await Task.create(req.body);
+
+
             return res.status(200).json(newTask);
 
         } catch (error) {
@@ -21,7 +23,7 @@ class TaskController {
         }
     }
 
-    async getAll(req: Request, res: Response) {
+    async getAll(req: Request, res: Response): Promise<Response> {
         try {
 
             const data = await Task.find();
@@ -34,7 +36,7 @@ class TaskController {
         }
     }
 
-    async get(req: Request, res: Response) {
+    async get(req: Request, res: Response): Promise<Response> {
 
         const { id } = req.params;
 
@@ -53,7 +55,40 @@ class TaskController {
         }
     }
 
-    async update(req: Request, res: Response) {
+    
+
+    async getFavorites(req: Request, res: Response): Promise<Response> {
+        try {
+
+            const data = await Task.find().where({favorite: true});
+
+            return res.status(200).send(data);
+
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({ error: "internal server error." });
+        }
+    }
+
+    async getByColor(req: Request, res: Response): Promise<Response> {
+
+        const {color} = req.params;
+
+        console.log(color);
+
+        try {
+            const data = await Task.find({color: color});
+
+            return res.status(200).send(data);
+
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({ error: "internal server error." });
+        }
+    }
+
+
+    async update(req: Request, res: Response): Promise<Response> {
 
         const { id } = req.params;
 
@@ -70,7 +105,7 @@ class TaskController {
         }
     }
 
-    async delete(req: Request, res: Response) {
+    async delete(req: Request, res: Response): Promise<Response> {
 
         const { id } = req.params;
 
