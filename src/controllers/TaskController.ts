@@ -55,21 +55,6 @@ class TaskController {
         }
     }
 
-    
-
-    async getFavorites(req: Request, res: Response): Promise<Response> {
-        try {
-
-            const data = await Task.find().where({favorite: true});
-
-            return res.status(200).send(data);
-
-        } catch (error) {
-            console.log(error);
-            return res.status(500).json({ error: "internal server error." });
-        }
-    }
-
     async getByColor(req: Request, res: Response): Promise<Response> {
 
         const {color} = req.params;

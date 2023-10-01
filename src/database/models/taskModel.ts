@@ -11,9 +11,7 @@ const productSchema = new mongoose.Schema(
                 required: true
             },
             color:{
-                type: String,
-                enum: ["#BAE2FF", "#B9FFDD", "#FFE8AC", "#FFCAB9", "#F99494", "#9DD6FF", "#ECA1FF", "#DAFF8B", "#FFA285", "#CDCDCD", "#979797", "#A99A7C", "#D9D9D9"],
-                default: "#D9D9D9"
+                type: String
             },
             favorite : {
                 type: Boolean,

@@ -3,7 +3,6 @@ import TaskController from '../controllers/TaskController';
 
 
 const taskRouter = Router();
-taskRouter.get('/favorite', TaskController.getFavorites);
 taskRouter.get('/:color', TaskController.getByColor);
 taskRouter.get('/', TaskController.getAll);
 taskRouter.get('/:id', TaskController.get);
