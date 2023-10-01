@@ -12,7 +12,7 @@ class App{
 
   constructor(){
     this.server = Express();
-    this.PORT = process.env.PORT as string
+    this.PORT = process.env.PORT as string || 3000
     this.init();
     this.router();
     this.middleware();
